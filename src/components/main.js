@@ -1,6 +1,10 @@
 import React from "react";
-
+import { Header } from "./index";
 const Main = () => {
-  return <h1>Hello World</h1>;
+  return (
+    <div>
+      <Header />
+    </div>
+  );
 };
 export default Main;
