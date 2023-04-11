@@ -7,12 +7,16 @@ const Header = () => {
     <header>
       <div className="logo">Stranger's Things</div>
       <nav className="link-container">
-       
-        <NavLink to="/" > Home </NavLink>
-        <NavLink to="/signin" >Sign In</NavLink>
-        <NavLink to="/register">Register</NavLink>
-          
-          
+        <NavLink to="/" className="link">
+          {" "}
+          Home{" "}
+        </NavLink>
+        <NavLink to="/signin" className="link">
+          Sign In
+        </NavLink>
+        <NavLink to="/register" className="link">
+          Register
+        </NavLink>
       </nav>
     </header>
   );
