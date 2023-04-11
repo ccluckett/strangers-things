@@ -26,7 +26,7 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register base_url={BASE_URL}/>} />
       </Routes>
     </div>
   );
