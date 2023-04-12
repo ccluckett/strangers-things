@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap");
 * {
   box-sizing: border-box;
   padding: 0;
@@ -11,6 +12,11 @@ header {
   background-color: #df2e38;
   color: white;
   padding: 10px;
+  /* height: 4rem; */
+}
+.logo {
+  font-size: 2rem;
+  font-family: "Cinzel", serif;
 }
 
 .links {
@@ -20,8 +26,12 @@ header {
 }
 
 .link {
+  font-size: 1.5rem;
   list-style: none;
   margin: 10px;
+}
+.link:hover {
+  color: rgb(205, 201, 201);
 }
 
 a {

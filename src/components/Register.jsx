@@ -18,27 +18,36 @@ const Register = ({ setToken }) => {
     navigate("/signin");
   };
   return (
-    <div>
+    <div className="form-sigin w-50 mt-5 ms-auto me-auto">
       <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          required
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-        />
-        <label>Password:</label>
-        <input
-          type="text"
-          value={password}
-          required
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <button type="submit">Register</button>
+        <div className="form-floating">
+          <input
+            className="form-control"
+            type="text"
+            value={username}
+            required
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+          />
+          <label for="floatingInput">Username</label>
+        </div>
+        <div className="form-floating">
+          <input
+            className="form-control"
+            type="text"
+            value={password}
+            required
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+          />
+          <label for="floatingInput">Password:</label>
+        </div>
+
+        <button type="submit" className="btn btn-outline-danger w-100 mt-3">
+          Register
+        </button>
       </form>
     </div>
   );
