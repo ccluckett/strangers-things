@@ -21,7 +21,7 @@ const Main = () => {
       <Header token={token} isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn token={token} setToken={setToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>} />
         <Route
           path="/register"
           element={<Register setToken={setToken} token={token} />}
