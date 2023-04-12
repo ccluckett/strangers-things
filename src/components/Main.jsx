@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { Header, SignIn, Register, Home } from ".";
 import { Routes, Route } from "react-router-dom";
+import { fetchPosts } from "../api";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
-  const COHORT_NAME = "2303-ftb-et-web-ft";
-  const BASE_URL = `https://strangers-things.herokuapp.com/api/${COHORT_NAME}`;
+  const [token, setToken] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(`${BASE_URL}/posts`);
-        const { data } = await response.json();
-        setPosts(data.posts);
-      } catch (error) {
-        console.error(error);
-      }
+    const getPosts = async () => {
+      const { posts } = await fetchPosts(); //Call posts from api folder
+      setPosts(posts);
     };
-    fetchPosts();
+    getPosts();
   }, []);
 
   return (
     <div>
-      <Header />
+      <Header token={token} isLoggedIn={isLoggedIn} />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/register" element={<Register base_url={BASE_URL}/>} />
+        <Route
+          path="/register"
+          element={<Register setToken={setToken} token={token} />}
+        />
       </Routes>
     </div>
   );

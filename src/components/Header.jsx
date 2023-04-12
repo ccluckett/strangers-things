@@ -2,21 +2,44 @@ import React from "react";
 import "./Header.css";
 import { NavLink } from "react-router-dom";
 
-const Header = () => {
+const Header = ({ token, isLoggedIn }) => {
   return (
     <header>
       <div className="logo">Stranger's Things</div>
       <nav className="link-container">
-        <NavLink to="/" className="link">
-          {" "}
-          Home{" "}
-        </NavLink>
-        <NavLink to="/signin" className="link">
-          Sign In
-        </NavLink>
-        <NavLink to="/register" className="link">
-          Register
-        </NavLink>
+        {isLoggedIn ? (
+          <>
+            <NavLink to="/" className="link">
+              {" "}
+              Home{" "}
+            </NavLink>
+            <NavLink to="/signout" className="link">
+              Sign Out
+            </NavLink>
+            <NavLink to="/posts" className="link">
+              Posts
+            </NavLink>
+            <NavLink to="/profile" className="link">
+              Progile
+            </NavLink>
+            <NavLink to="/messages" className="link">
+              Messages
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink to="/" className="link">
+              {" "}
+              Home{" "}
+            </NavLink>
+            <NavLink to="/signin" className="link">
+              Sign In
+            </NavLink>
+            <NavLink to="/register" className="link">
+              Register
+            </NavLink>
+          </>
+        )}
       </nav>
     </header>
   );
