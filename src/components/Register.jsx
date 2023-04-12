@@ -30,7 +30,7 @@ const Register = ({ setToken }) => {
               setUsername(event.target.value);
             }}
           />
-          <label for="floatingInput">Username</label>
+          <label htmlFor="floatingInput">Username</label>
         </div>
         <div className="form-floating">
           <input
@@ -42,7 +42,7 @@ const Register = ({ setToken }) => {
               setPassword(event.target.value);
             }}
           />
-          <label for="floatingInput">Password:</label>
+          <label htmlFor="floatingInput">Password:</label>
         </div>
 
         <button type="submit" className="btn btn-outline-danger w-100 mt-3">

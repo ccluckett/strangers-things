@@ -2,7 +2,7 @@ import React from "react";
 import "./Header.css";
 import { NavLink } from "react-router-dom";
 
-const Header = ({ token, isLoggedIn }) => {
+const Header = ({ isLoggedIn }) => {
   return (
     <header>
       <div className="logo">Stranger's Things</div>
@@ -13,17 +13,15 @@ const Header = ({ token, isLoggedIn }) => {
               {" "}
               Home{" "}
             </NavLink>
-            <NavLink to="/signout" className="link">
-              Sign Out
-            </NavLink>
+
             <NavLink to="/posts" className="link">
               Posts
             </NavLink>
             <NavLink to="/profile" className="link">
-              Progile
+              Profile
             </NavLink>
-            <NavLink to="/messages" className="link">
-              Messages
+            <NavLink to="/signout" className="link">
+              Sign Out
             </NavLink>
           </>
         ) : (

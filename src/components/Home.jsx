@@ -1,6 +1,7 @@
 import React from "react";
 import "./Home.css";
 const Home = ({ posts }) => {
+  console.log(posts);
   return (
     <div>
       {posts ? (

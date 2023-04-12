@@ -14,7 +14,6 @@ const SignIn = ({ token, setToken, setIsLoggedIn }) => {
     console.log(token);
     if (token === response) {
       setIsLoggedIn(true);
-      setToken(response);
       navigate("/profile");
     }
   };
@@ -46,7 +45,7 @@ const SignIn = ({ token, setToken, setIsLoggedIn }) => {
           <label for="floatingInput">Password:</label>
         </div>
 
-        <button type="submit" className="btn btn-outline-success w-100 mt-3">
+        <button type="submit" className="btn btn-success w-100 mt-3">
           Sign In
         </button>
       </form>

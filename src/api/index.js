@@ -97,6 +97,7 @@ export const registerUser = async (username, password) => {
       }),
     });
     const { data } = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
     console.error(error);
@@ -124,5 +125,105 @@ export const login = async (username, password) => {
     return result;
   } catch (error) {
     console.error(error);
+  }
+};
+
+//Get userData
+const userData = {
+  posts: [
+    {
+      location: "[On Request]",
+      willDeliver: false,
+      messages: [
+        {
+          _id: "5e8d1f2539e7a70017a7c968",
+          fromUser: {
+            _id: "5e8d1f2539e7a70017a7c962",
+            username: "jane1234",
+          },
+          content: "I am very much in the market for a fine violin.",
+        },
+      ],
+      active: true,
+      _id: "5e8d1f2539e7a70017a7c964",
+      author: "5e8d1f2539e7a70017a7c961",
+      title: "Practically new Stradivarius",
+      description:
+        "I've really only used this three or four times.  I thought it would be a good purchase, shows what I know.",
+      price: "$14.3 million",
+      createdAt: "2020-04-08T00:47:33.794Z",
+      updatedAt: "2020-04-08T00:47:33.865Z",
+      __v: 0,
+    },
+    {
+      location: "Bronx, NY",
+      willDeliver: false,
+      messages: [],
+      active: true,
+      _id: "5e8d1f8647b6ce0017600593",
+      title: "Schwinn Bicycle",
+      price: "3.88",
+      description: "This is a 19 speed bicycle, barely used.",
+      author: "5e8d1f2539e7a70017a7c961",
+      createdAt: "2020-04-08T00:49:10.248Z",
+      updatedAt: "2020-04-08T00:49:10.248Z",
+      __v: 0,
+    },
+  ],
+  messages: [
+    {
+      _id: "5e8d1f2539e7a70017a7c968",
+      post: {
+        _id: "5e8d1f2539e7a70017a7c964",
+        title: "Practically new Stradivarius",
+      },
+      fromUser: {
+        _id: "5e8d1f2539e7a70017a7c962",
+        username: "jane1234",
+      },
+      content: "I am very much in the market for a fine violin.",
+    },
+    {
+      _id: "5e8d1f2539e7a70017a7c969",
+      post: {
+        _id: "5e8d1f2539e7a70017a7c965",
+        title: "Golden Retriever puppies",
+      },
+      fromUser: {
+        _id: "5e8d1f2539e7a70017a7c961",
+        username: "joe1234",
+      },
+      content: "OMG Puppies... I'll take them all!",
+    },
+    {
+      _id: "5e8d1fd747b6ce0017600594",
+      content: "I really love this item.  Can I have it?",
+      post: {
+        _id: "5e8d1f2539e7a70017a7c965",
+        title: "Golden Retriever puppies",
+      },
+      fromUser: {
+        _id: "5e8d1f2539e7a70017a7c961",
+        username: "joe1234",
+      },
+    },
+  ],
+  _id: "5e8d1f2539e7a70017a7c961",
+  username: "joe1234",
+  __v: 0,
+};
+export const myData = async (token) => {
+  try {
+    // const response = await fetch(`${BASE_URL}/users/me`, {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': `Bearer ${token}`
+    //   },
+    // });
+    // const result = await response.json();
+    // console.log(result);
+    return userData;
+  } catch (err) {
+    console.error(err);
   }
 };
