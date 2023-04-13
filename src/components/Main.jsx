@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Header, SignIn, Register, Home } from ".";
+import { Header, SignIn, Register, Home, Profile, Posts } from ".";
 import { Routes, Route } from "react-router-dom";
 import { fetchPosts } from "../api";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -36,6 +36,8 @@ const Main = () => {
           path="/register"
           element={<Register setToken={setToken} token={token} />}
         />
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/posts" element={<Posts />}></Route>
       </Routes>
     </div>
   );
