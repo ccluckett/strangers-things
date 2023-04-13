@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Header, SignIn, Register, Home, Profile, Posts } from ".";
+import {
+  Header,
+  SignIn,
+  Register,
+  Home,
+  Profile,
+  Posts,
+  SignOut,
+  CreatePost,
+} from ".";
 import { Routes, Route } from "react-router-dom";
 import { fetchPosts } from "../api";
 
@@ -15,17 +24,22 @@ const Main = () => {
     };
     getPosts();
   }, []);
-
+  console.log(posts);
   return (
     <div>
-      <Header token={token} setToken={setToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
+      <Header
+        token={token}
+        setToken={setToken}
+        isLoggedIn={isLoggedIn}
+        setIsLoggedIn={setIsLoggedIn}
+      />
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
         <Route
           path="/signin"
           element={
             <SignIn
-              token={token}
+              tokenOnState={token}
               setToken={setToken}
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
@@ -37,7 +51,19 @@ const Main = () => {
           element={<Register setToken={setToken} token={token} />}
         />
         <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/posts" element={<Posts />}></Route>
+        <Route path="/posts" element={<Posts posts={posts} />}></Route>
+        <Route
+          path="/signout"
+          element={
+            <SignOut setToken={setToken} setIsLoggedIn={setIsLoggedIn} />
+          }
+        />
+        <Route
+          path="/createpost"
+          element={
+            <CreatePost token={token} posts={posts} setPosts={setPosts} />
+          }
+        />
       </Routes>
     </div>
   );

@@ -14,25 +14,25 @@ const Profile = ({ token }) => {
   return (
     <div>
       {data.messages ? (
-        <div key={data._id}>
+        <div>
           <h1>Messages from other users</h1>
           {data.messages.map((message) => {
             return (
-              <>
+              <div key={message._id}>
                 <h3>User:{message.fromUser.username}</h3>
                 <h4>Title:{message.post.title}</h4>
                 <p>{message.content}</p>
-              </>
+              </div>
             );
           })}
           <h1>Posts from other users</h1>
           {data.posts.map((post) => {
             return (
-              <>
+              <div key={post._id}>
                 <h1>{post.title}</h1>
                 <h5>{post.location}</h5>
                 <p>{post.price}</p>
-              </>
+              </div>
             );
           })}
         </div>

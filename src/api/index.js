@@ -96,7 +96,7 @@ export const registerUser = async (username, password) => {
         },
       }),
     });
-    const { data } = await response.json();
+    const data = await response.json();
     console.log(data);
     return data;
   } catch (error) {
@@ -127,7 +127,6 @@ export const login = async (username, password) => {
     console.error(error);
   }
 };
-
 
 //Get userData
 const userData = {
@@ -226,5 +225,52 @@ export const myData = async (token) => {
     return userData;
   } catch (err) {
     console.error(err);
+  }
+};
+
+//Make a most
+
+// Fake post data
+const fakePostData = {
+  success: true,
+  error: null,
+  data: {
+    post: {
+      location: "Bronx, NY",
+      willDeliver: false,
+      messages: [],
+      active: true,
+      _id: "5e8d1bd48829fb0017d2233b",
+      title: "Schwinn Bicycle",
+      price: "3.88",
+      description: "This is a 19 speed bicycle, barely used.",
+      author: {
+        _id: "5e8d1a02829c8e0017c20b55",
+        username: "joe1234",
+      },
+      createdAt: "2020-04-08T00:33:24.157Z",
+      updatedAt: "2020-04-08T00:33:24.157Z",
+      __v: 0,
+      isAuthor: true,
+    },
+  },
+};
+export const makePost = async (token, postObj) => {
+  try {
+    // const response = await fetch(`${BASE_URL}/posts`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Authorization: `Bearer ${token}`,
+    //   },
+    //   body: JSON.stringify({
+    //     postObj,
+    //   }),
+    // });
+    // const result = await response.json();
+    // return result;
+    return fakePostData;
+  } catch (error) {
+    console.error(error);
   }
 };

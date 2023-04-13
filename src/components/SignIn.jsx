@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { login } from "../api";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = ({ token, setToken, setIsLoggedIn }) => {
+const SignIn = ({ tokenOnState, setToken, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -10,11 +10,17 @@ const SignIn = ({ token, setToken, setIsLoggedIn }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { token } = await login(username, password);
-    let response = token;
-    console.log(token);
-    if (token === response) {
+    let response = token; //onClick run func that will grab the token if a player did indeed register
+    if (tokenOnState === response || response) {
+      //compare the token on state when user just register
+      setToken(response);
+      localStorage.setItem("token", response);
       setIsLoggedIn(true);
       navigate("/profile");
+    } else {
+      setTimeout(() => {
+        alert("Not Authorized");
+      });
     }
   };
   return (
@@ -30,7 +36,7 @@ const SignIn = ({ token, setToken, setIsLoggedIn }) => {
               setUsername(event.target.value);
             }}
           />
-          <label for="floatingInput">Username</label>
+          <label htmlFor="floatingInput">Username</label>
         </div>
         <div className="form-floating">
           <input
@@ -42,7 +48,7 @@ const SignIn = ({ token, setToken, setIsLoggedIn }) => {
               setPassword(event.target.value);
             }}
           />
-          <label for="floatingInput">Password:</label>
+          <label htmlFor="floatingInput">Password:</label>
         </div>
 
         <button type="submit" className="btn btn-success w-100 mt-3">

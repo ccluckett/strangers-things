@@ -11,8 +11,7 @@ const Register = ({ setToken }) => {
     event.preventDefault();
 
     const { token } = await registerUser(username, password); //call register func in api folder
-    setToken(token);
-    localStorage.setItem("token", token);
+    setToken(token); //once you register that token will
     setUsername("");
     setPassword("");
     navigate("/signin");
