@@ -1,8 +1,10 @@
 import React from "react";
 import "./Header.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
-const Header = ({ isLoggedIn }) => {
+
+const Header = ({ isLoggedIn, setIsLoggedIn, setToken}) => {
+  const navigate = useNavigate();
   return (
     <header>
       <div className="logo">Stranger's Things</div>
@@ -20,9 +22,13 @@ const Header = ({ isLoggedIn }) => {
             <NavLink to="/profile" className="link">
               Profile
             </NavLink>
-            <NavLink to="/signout" className="link">
-              Sign Out
-            </NavLink>
+             <button onClick={() => {
+                setToken('')
+                setIsLoggedIn(false)
+                navigate("/")
+             }}>
+              SignOut
+             </button>
           </>
         ) : (
           <>
