@@ -15,7 +15,8 @@ import { fetchPosts } from "../api";
 const Main = () => {
   const [posts, setPosts] = useState([]);
   const [token, setToken] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const getPosts = async () => {
@@ -24,7 +25,6 @@ const Main = () => {
     };
     getPosts();
   }, []);
-  console.log(posts);
   return (
     <div>
       <Header
@@ -39,10 +39,9 @@ const Main = () => {
           path="/signin"
           element={
             <SignIn
-              tokenOnState={token}
               setToken={setToken}
-              isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
+              setUser={setUser}
             />
           }
         />
@@ -50,7 +49,7 @@ const Main = () => {
           path="/register"
           element={<Register setToken={setToken} token={token} />}
         />
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/profile" element={<Profile user={user} />}></Route>
         <Route path="/posts" element={<Posts posts={posts} />}></Route>
         <Route
           path="/signout"

@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { myData } from "../api";
 
-const Profile = ({ token }) => {
-  const [data, setData] = useState({});
-  useEffect(() => {
-    const getuserData = async () => {
-      const result = await myData(); //When API doc works pass in the token from state
-      setData(result);
-    };
-    getuserData();
-  }, []);
-  console.log(data, "this is my result");
+const Profile = ({ user }) => {
+  console.log(user);
   return (
     <div>
-      {data.messages ? (
+      {user.messages ? (
         <div>
           <h1>Messages from other users</h1>
-          {data.messages.map((message) => {
+          {user.messages.map((message) => {
             return (
-              <div key={message._id}>
+              <div>
                 <h3>User:{message.fromUser.username}</h3>
                 <h4>Title:{message.post.title}</h4>
                 <p>{message.content}</p>
@@ -26,7 +18,7 @@ const Profile = ({ token }) => {
             );
           })}
           <h1>Posts from other users</h1>
-          {data.posts.map((post) => {
+          {user.posts.map((post) => {
             return (
               <div key={post._id}>
                 <h1>{post.title}</h1>

@@ -1,26 +1,30 @@
 import React, { useState } from "react";
-import { login } from "../api";
+import { login, myData } from "../api";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = ({ tokenOnState, setToken, setIsLoggedIn }) => {
+const SignIn = ({ setIsLoggedIn, setUser, setToken }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { token } = await login(username, password);
-    let response = token; //onClick run func that will grab the token if a player did indeed register
-    if (tokenOnState === response || response) {
-      //compare the token on state when user just register
-      setToken(response);
-      localStorage.setItem("token", response);
+    const user = {
+      username: username,
+      password: password,
+    };
+
+    const { data } = await login(user);
+    let responseToken = data.token; //onClick run func that will grab the token if a player did indeed register
+    if (responseToken) {
+      const result = await myData(responseToken);
+      localStorage.setItem("token", responseToken);
+      setToken(responseToken);
+      setUser(result.data);
       setIsLoggedIn(true);
+      setUsername("");
+      setPassword("");
       navigate("/profile");
-    } else {
-      setTimeout(() => {
-        alert("Not Authorized");
-      });
     }
   };
   return (

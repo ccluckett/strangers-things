@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { makePost } from "../api";
+
 const CreatePost = ({ token, setPosts, posts }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -8,18 +9,23 @@ const CreatePost = ({ token, setPosts, posts }) => {
   const [location, setLocation] = useState("[On Request]");
   const [willDeliver, setWillDeliver] = useState(false);
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const post = {
+    const postObj = {
+      //Create my post
       title: title,
       description: description,
       price: price,
       location: location,
       willDeliver: willDeliver,
     };
-    const { data } = await makePost(token, post);
-    const createdPost = data.post;
-    setPosts([createdPost, ...posts]);
+
+    const data = await makePost(token, postObj);
+    setPosts([data.post, ...posts]);
+
+    navigate("/profile");
   };
 
   return (
@@ -67,9 +73,7 @@ const CreatePost = ({ token, setPosts, posts }) => {
             setWillDeliver(!willDeliver);
           }}
         ></input>
-        <button type="submit" onClick={() => {}}>
-          Add Post
-        </button>
+        <button type="submit">Add Post</button>
       </form>
     </div>
   );
