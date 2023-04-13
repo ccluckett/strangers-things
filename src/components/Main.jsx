@@ -18,7 +18,7 @@ const Main = () => {
 
   return (
     <div>
-      <Header token={token} isLoggedIn={isLoggedIn} />
+      <Header token={token} setToken={setToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>
       <Routes>
         <Route path="/" element={<Home posts={posts} />} />
         <Route
