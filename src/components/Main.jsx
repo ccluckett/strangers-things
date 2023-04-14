@@ -58,6 +58,7 @@ const Main = () => {
               setPosts={setPosts}
               token={token}
               posts={posts}
+              setUser={setUser}
             />
           }
         ></Route>

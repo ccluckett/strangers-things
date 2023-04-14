@@ -22,10 +22,11 @@ const CreatePost = ({ token, setPosts, posts }) => {
       willDeliver: willDeliver,
     };
 
-    const data = await makePost(token, postObj);
+    const { data } = await makePost(token, postObj);
     console.log(data);
     if (data.post) {
       setPosts([data.post, ...posts]);
+      console.log(posts);
       navigate("/profile");
     }
   };
