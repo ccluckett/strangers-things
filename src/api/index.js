@@ -72,9 +72,9 @@ const fakeData = {
 //Fetch Post
 export const fetchPosts = async () => {
   try {
-    // const response = await fetch(`${BASE_URL}/posts`);
-    // const { data } = await response.json();
-    const { data } = fakeData;
+    const response = await fetch(`${BASE_URL}/posts`);
+    const { data } = await response.json();
+    // const { data } = fakeData;
     return data;
   } catch (error) {
     console.error(error);
@@ -96,8 +96,8 @@ export const registerUser = async (username, password) => {
         },
       }),
     });
-    const { data } = await response.json();
-    console.log(data);
+    const data = await response.json();
+
     return data;
   } catch (error) {
     console.error(error);
@@ -106,28 +106,26 @@ export const registerUser = async (username, password) => {
 
 //Fetch Token
 
-export const login = async (username, password) => {
+export const login = async (userObj) => {
   try {
     const response = await fetch(`${BASE_URL}/users/login`, {
       method: "POST",
       headers: {
-        "Conent-Type": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         user: {
-          username: username,
-          password: password,
+          username: userObj.username,
+          password: userObj.password,
         },
       }),
     });
     const result = await response.json();
-    console.log(result);
     return result;
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    console.error(err);
   }
 };
-
 
 //Get userData
 const userData = {
@@ -215,15 +213,79 @@ const userData = {
 };
 export const myData = async (token) => {
   try {
-    // const response = await fetch(`${BASE_URL}/users/me`, {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${token}`
-    //   },
-    // });
-    // const result = await response.json();
-    // console.log(result);
-    return userData;
+    const response = await fetch(`${BASE_URL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//Make a most
+export const makePost = async (token, postObj) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title: postObj.title,
+          description: postObj.description,
+          price: postObj.price,
+          willDeliver: postObj.willDeliver,
+        },
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+};
+//Update a post
+export const updatePost = async (token, postObj, POST_ID) => {
+  try {
+    // You will need to insert a variable into the fetch template literal
+    // in order to make the POST_ID dynamic.
+    // 5e8d1bd48829fb0017d2233b is just for demonstration.
+    const response = await fetch(`${BASE_URL}/posts/${POST_ID}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        postObj,
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+//const
+export const deletePost = async (token, postId) => {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
   } catch (err) {
     console.error(err);
   }
