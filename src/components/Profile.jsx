@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deletePost } from "../api";
-const Profile = ({ user, posts, setPosts, token }) => {
+const Profile = ({ user, posts, setPosts, token, setUser }) => {
+  const [userPost, setUserPost] = useState([]);
   const navigate = useNavigate();
-  console.log(posts);
+  console.log(user.posts);
 
   const handleDelete = async (postId) => {
     console.log(postId);
     await deletePost(token, postId);
-    setPosts([...user.posts.filter((post) => post.id !== post._id)]);
+    let profilePost = user.posts.filter((post) => post.active === true); //Run only whe the delete button is clicked
+    setUserPost(profilePost);
   };
+  useEffect(() => {
+    let profilePost = user.posts.filter((post) => post.active === true); //Run the first time
+    setUserPost(profilePost);
+  }, []);
+
   return (
     <div>
       {user.messages ? (
@@ -25,7 +32,7 @@ const Profile = ({ user, posts, setPosts, token }) => {
             );
           })}
           <h1>Posts made</h1>
-          {user.posts.map((post) => {
+          {userPost.map((post) => {
             return (
               <div key={post._id}>
                 <h1>{post.title}</h1>
