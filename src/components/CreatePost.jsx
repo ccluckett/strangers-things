@@ -23,9 +23,11 @@ const CreatePost = ({ token, setPosts, posts }) => {
     };
 
     const data = await makePost(token, postObj);
-    setPosts([data.post, ...posts]);
-
-    navigate("/profile");
+    console.log(data);
+    if (data.post) {
+      setPosts([data.post, ...posts]);
+      navigate("/profile");
+    }
   };
 
   return (

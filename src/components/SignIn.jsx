@@ -14,17 +14,21 @@ const SignIn = ({ setIsLoggedIn, setUser, setToken }) => {
       password: password,
     };
 
-    const { data } = await login(user);
+    const { data } = await login(user); //give you token
     let responseToken = data.token; //onClick run func that will grab the token if a player did indeed register
     if (responseToken) {
-      const result = await myData(responseToken);
       localStorage.setItem("token", responseToken);
+
+      const result = await myData(responseToken); //Return messages and posts
+
       setToken(responseToken);
       setUser(result.data);
       setIsLoggedIn(true);
       setUsername("");
       setPassword("");
       navigate("/profile");
+    } else {
+      alert("Not Authorized");
     }
   };
   return (

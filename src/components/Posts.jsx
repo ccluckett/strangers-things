@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./Posts.css";
 
 const Posts = ({ posts }) => {
-  useEffect(() => {}, [posts]);
   const navigate = useNavigate();
   return (
     <div>

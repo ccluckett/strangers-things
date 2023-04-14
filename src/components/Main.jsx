@@ -17,6 +17,7 @@ const Main = () => {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [isActive, seIsActive] = useState(true);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -49,7 +50,17 @@ const Main = () => {
           path="/register"
           element={<Register setToken={setToken} token={token} />}
         />
-        <Route path="/profile" element={<Profile user={user} />}></Route>
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              user={user}
+              setPosts={setPosts}
+              token={token}
+              posts={posts}
+            />
+          }
+        ></Route>
         <Route path="/posts" element={<Posts posts={posts} />}></Route>
         <Route
           path="/signout"

@@ -2,7 +2,7 @@ import React from "react";
 const Home = ({ posts }) => {
   return (
     <div>
-      {posts ? (
+      {posts.length ? (
         posts.map((post) => {
           return (
             <div key={post._id} className="container">
