@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deletePost } from "../api";
-const Profile = ({ user, posts, setPosts, token, setUser }) => {
+const Profile = ({ user, token }) => {
   const [userPost, setUserPost] = useState([]);
   const navigate = useNavigate();
-  console.log(user.posts);
 
   const handleDelete = async (postId) => {
     console.log(postId);
     await deletePost(token, postId);
-    let profilePost = user.posts.filter((post) => post.active === true); //Run only whe the delete button is clicked
-    setUserPost(profilePost);
+    setUserPost(user.posts.filter((post) => post.active === true)); //Run only whe the delete button is clicked
   };
   useEffect(() => {
-    let profilePost = user.posts.filter((post) => post.active === true); //Run the first time
-    setUserPost(profilePost);
+    {
+      user.posts
+        ? setUserPost(user.posts.filter((post) => post.active === true))
+        : null;
+    } //Run the first time
   }, []);
 
   return (

@@ -3,6 +3,7 @@ import "./Header.css";
 import { NavLink } from "react-router-dom";
 
 const Header = ({ isLoggedIn, setIsLoggedIn, setToken, token }) => {
+  localStorage.setItem("isLoggedIn", isLoggedIn);
   return (
     <header>
       <div className="logo">Stranger's Things</div>

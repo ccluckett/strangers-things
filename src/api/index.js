@@ -290,3 +290,27 @@ export const deletePost = async (token, postId) => {
     console.error(err);
   }
 };
+
+export const postMessage = async (token, postId, content) => {
+  console.log(postId, "this my postid");
+
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        message: {
+          content: content,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};

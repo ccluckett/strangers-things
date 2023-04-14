@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { login, myData } from "../api";
 import { useNavigate } from "react-router-dom";
 
-const SignIn = ({ setIsLoggedIn, setUser, setToken }) => {
+const SignIn = ({ setIsLoggedIn, setUser, setToken, isLoggedIn }) => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -13,17 +13,17 @@ const SignIn = ({ setIsLoggedIn, setUser, setToken }) => {
       username: username,
       password: password,
     };
-
     const { data } = await login(user); //give you token
     let responseToken = data.token; //onClick run func that will grab the token if a player did indeed register
-    if (responseToken) {
-      localStorage.setItem("token", responseToken);
+    console.log(responseToken);
+    localStorage.setItem("token", responseToken); //storing token to storage
+    if (responseToken !== "") {
+      setIsLoggedIn(true);
+      setToken(responseToken);
 
       const result = await myData(responseToken); //Return messages and posts
-
-      setToken(responseToken);
       setUser(result.data);
-      setIsLoggedIn(true);
+
       setUsername("");
       setPassword("");
       navigate("/profile");
