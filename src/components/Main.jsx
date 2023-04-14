@@ -18,6 +18,7 @@ const Main = () => {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
+  const [messages, setMessages] = useState({});
 
   useEffect(() => {
     const getPosts = async () => {
@@ -65,7 +66,15 @@ const Main = () => {
         ></Route>
         <Route
           path="/posts"
-          element={<Posts posts={posts} user={user} token={token} />}
+          element={
+            <Posts
+              posts={posts}
+              user={user}
+              token={token}
+              messages={messages}
+              setMessages={setMessages}
+            />
+          }
         ></Route>
         <Route
           path="/signout"

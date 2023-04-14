@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import CreateMessage from "./CreateMessage";
 import "./Posts.css";
 
-const Posts = ({ posts, user, token }) => {
-  console.log(token);
+const Posts = ({ posts, user, token, messages, setMessages }) => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  console.log(messages);
   return (
     <div>
       <button
@@ -35,11 +35,24 @@ const Posts = ({ posts, user, token }) => {
                   >
                     {show ? "Close Message" : "Create Message"}
                   </button>
-                  {show ? <CreateMessage post={post} token={token} /> : ""}
+                  {show ? (
+                    <CreateMessage
+                      post={post}
+                      token={token}
+                      setMessages={setMessages}
+                    />
+                  ) : (
+                    ""
+                  )}
                 </>
               ) : (
                 ""
               )}
+              <p>
+                {messages.message.post === post._id
+                  ? messages.message.content
+                  : ""}
+              </p>
             </div>
           );
         })

@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { postMessage } from "../api";
 
-const CreateMessage = ({ post, token }) => {
-  console.log(token);
+const CreateMessage = ({ post, token, setMessages }) => {
   const [content, setContent] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(post._id);
-    let resposne = await postMessage(token, post._id, content);
-    console.log(resposne);
+
+    const { data } = await postMessage(token, post._id, content);
+    setMessages(data);
+    setContent("");
   };
-  console.log(post);
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
