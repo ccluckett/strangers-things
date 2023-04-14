@@ -1,8 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CreateMessage from "./CreateMessage";
 import "./Posts.css";
 
-const Posts = ({ posts }) => {
+const Posts = ({ posts, user, token }) => {
+  console.log(token);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
   return (
     <div>
@@ -23,6 +26,20 @@ const Posts = ({ posts }) => {
               <h3 className="title">{post.title}</h3>
               <em className="price">{post.price}</em>
               <p className="description">{post.description}</p>
+              {user._id !== post.author._id ? (
+                <>
+                  <button
+                    onClick={() => {
+                      setShow(!show);
+                    }}
+                  >
+                    {show ? "Close Message" : "Create Message"}
+                  </button>
+                  {show ? <CreateMessage post={post} token={token} /> : ""}
+                </>
+              ) : (
+                ""
+              )}
             </div>
           );
         })

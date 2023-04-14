@@ -8,6 +8,7 @@ import {
   Posts,
   SignOut,
   CreatePost,
+  CreateMessage,
 } from ".";
 import { Routes, Route } from "react-router-dom";
 import { fetchPosts } from "../api";
@@ -17,7 +18,6 @@ const Main = () => {
   const [token, setToken] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  const [isActive, seIsActive] = useState(true);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -43,6 +43,7 @@ const Main = () => {
               setToken={setToken}
               setIsLoggedIn={setIsLoggedIn}
               setUser={setUser}
+              isLoggedIn={isLoggedIn}
             />
           }
         />
@@ -62,7 +63,10 @@ const Main = () => {
             />
           }
         ></Route>
-        <Route path="/posts" element={<Posts posts={posts} />}></Route>
+        <Route
+          path="/posts"
+          element={<Posts posts={posts} user={user} token={token} />}
+        ></Route>
         <Route
           path="/signout"
           element={
@@ -75,6 +79,7 @@ const Main = () => {
             <CreatePost token={token} posts={posts} setPosts={setPosts} />
           }
         />
+        <Route path="/editpost" element={<CreateMessage token={token} />} />
       </Routes>
     </div>
   );
