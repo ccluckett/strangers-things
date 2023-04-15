@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import CreateMessage from "./CreateMessage";
 import "./Posts.css";
 
+
 const Posts = ({ posts, user, token, messages, setMessages }) => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  console.log(messages);
+  console.log(posts);
   return (
     <div>
+       
       <button
         className="btn btn-outline-danger create-post"
         onClick={() => {
@@ -17,7 +19,6 @@ const Posts = ({ posts, user, token, messages, setMessages }) => {
       >
         Create Post
       </button>
-
       {posts ? (
         posts.map((post) => {
           return (
@@ -48,11 +49,15 @@ const Posts = ({ posts, user, token, messages, setMessages }) => {
               ) : (
                 ""
               )}
-              <p>
-                {messages.message.post === post._id
-                  ? messages.message.content
-                  : ""}
-              </p>
+              {messages.message ? (
+                <p>
+                  {messages.message.post === post._id
+                    ? messages.message.content
+                    : ""}
+                </p>
+              ) : (
+                ""
+              )}
             </div>
           );
         })
@@ -62,5 +67,4 @@ const Posts = ({ posts, user, token, messages, setMessages }) => {
     </div>
   );
 };
-
 export default Posts;

@@ -1,7 +1,16 @@
 import React from "react";
+import SearchForm from "./SearchForm";
+
+
 const Home = ({ posts }) => {
   return (
     <div>
+       <div>
+       <div>
+         <SearchForm />
+       </div>
+
+       </div>
       {posts.length ? (
         posts.map((post) => {
           return (
