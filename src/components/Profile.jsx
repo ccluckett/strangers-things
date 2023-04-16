@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deletePost } from "../api";
+import "./Profile.css";
+
 const Profile = ({ user, token }) => {
   const [userPost, setUserPost] = useState([]);
   const navigate = useNavigate();
@@ -19,10 +21,10 @@ const Profile = ({ user, token }) => {
   }, []);
 
   return (
-    <div>
+    <div className="square">
       {user.messages ? (
-        <div>
-          <h1>Messages made</h1>
+        <div className="box">
+          <h1 className="messsages">Messages Made</h1>
           {user.messages.map((message) => {
             return (
               <div>
@@ -32,11 +34,11 @@ const Profile = ({ user, token }) => {
               </div>
             );
           })}
-          <h1>Posts made</h1>
+          <h1 className="posts">Posts Made</h1>
           {userPost.map((post) => {
             return (
-              <div key={post._id}>
-                <h1>{post.title}</h1>
+              <div className="post" key={post._id}>
+                <h2>{post.title}</h2>
                 <h5>{post.location}</h5>
                 <p>{post.price}</p>
                 <button

@@ -7,3 +7,4 @@ export { default as Posts } from "./Posts";
 export { default as SignOut } from "./SignOut";
 export { default as CreatePost } from "./CreatePost";
 export { default as CreateMessage } from "./CreateMessage";
+export { default as SearchForm } from "./SearchForm";

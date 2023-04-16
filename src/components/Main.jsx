@@ -9,6 +9,7 @@ import {
   SignOut,
   CreatePost,
   CreateMessage,
+  SearchForm,
 } from ".";
 import { Routes, Route } from "react-router-dom";
 import { fetchPosts } from "../api";
@@ -89,6 +90,7 @@ const Main = () => {
           }
         />
         <Route path="/editpost" element={<CreateMessage token={token} />} />
+        <Route path="/searchform" element={<SearchForm posts={posts} setPosts={setPosts} />} />
       </Routes>
     </div>
   );
